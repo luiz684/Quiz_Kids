@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz das Matérias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css"/>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <header class="app-header">
+      <h1>Quiz das Matérias</h1>
+      <div class="header-actions">
+        <button id="open-theme" class="btn btn-ghost small">Temas</button>
+        <button id="a11y-button" class="btn btn-ghost small">Acessibilidade</button>
+        <button id="open-login" class="btn small">Entrar</button>
+        <div class="user-profile hidden" id="user-profile">
+          <img id="user-avatar" class="user-avatar" alt="Avatar" />
+          <span id="user-name" class="user-name"></span>
+          <button id="logout-button" class="btn btn-ghost small">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="app-main">
+      <!-- Login -->
+      <section id="login-screen" class="screen modal hidden" role="dialog" aria-modal="true" aria-label="Entrar no sistema">
+        <div class="card">
+          <h2>Entrar</h2>
+          <p class="muted">Crie seu perfil rapidinho ou entre com Google</p>
+          <div class="login-grid">
+            <!-- Cadastro manual -->
+            <div class="login-box">
+              <h3>Cadastro rápido</h3>
+              <label class="label" for="first-name">Nome</label>
+              <input id="first-name" class="input" type="text" placeholder="Ex.: Maria" maxlength="20" />
+              <label class="label" for="last-name">Sobrenome</label>
+              <input id="last-name" class="input" type="text" placeholder="Ex.: Silva" maxlength="20" />
+              <label class="label" for="nickname">Nickname</label>
+              <input id="nickname" class="input" type="text" placeholder="Ex.: MariStar" maxlength="16" />
+              <div class="label">Escolha um avatar</div>
+              <div id="avatar-grid" class="avatar-grid"></div>
+              <button id="quick-create" class="btn wide">Começar</button>
+            </div>
+            <!-- Google -->
+            <div class="login-box">
+              <h3>Google</h3>
+              <p class="muted small">Entre com sua conta Google</p>
+              <div id="g_id_onload"
+                   data-client_id="REPLACE_WITH_YOUR_GOOGLE_CLIENT_ID"
+                   data-context="signin"
+                   data-ux_mode="popup"
+                   data-callback="onGoogleCredentialResponse"
+                   data-auto_prompt="false"></div>
+              <div class="g_id_signin"
+                   data-type="standard"
+                   data-shape="pill"
+                   data-theme="filled_blue"
+                   data-text="signin_with"
+                   data-size="large"
+                   data-logo_alignment="left"></div>
+            </div>
+          </div>
+          <div class="controls">
+            <button id="close-login" class="btn btn-ghost">Fechar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu -->
+      <section id="menu-screen" class="screen">
+        <h2>Escolha uma matéria</h2>
+        <div id="subjects-grid" class="subjects-grid"></div>
+      </section>
+
+      <!-- Quiz -->
+      <section id="quiz-screen" class="screen hidden" aria-live="polite">
+        <div class="quiz-topbar">
+          <button id="back-to-menu" class="btn btn-ghost">⟵ Menu</button>
+          <div class="quiz-info">
+            <span id="category-name" class="badge"></span>
+            <div class="timer"><span id="time-remaining">30</span>s</div>
+          </div>
+        </div>
+        <div class="question-card">
+          <div id="progress" class="progress"></div>
+          <h3 id="question-text" class="question-text"></h3>
+          <div id="options" class="options"></div>
+          <div class="hint-area">
+            <button id="hint-button" class="btn btn-hint">💡 Dica</button>
+            <div class="hint-viewport"><img id="hint-image" class="hint-image hidden" alt="Dica" /></div>
+          </div>
+          <div class="controls"><button id="next-button" class="btn" disabled>Próxima</button></div>
+        </div>
+      </section>
+
+      <!-- Resultado -->
+      <section id="result-screen" class="screen hidden">
+        <div class="result-card">
+          <h2>Resultado</h2>
+          <p id="result-summary"></p>
+          <div class="result-actions">
+            <button id="retry-button" class="btn">Tentar novamente</button>
+            <button id="result-menu-button" class="btn btn-ghost">Menu</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="confetti-container" class="confetti-container"></div>
+
+    <!-- Acessibilidade -->
+    <section id="a11y-panel" class="a11y-panel hidden">
+      <div class="a11y-content">
+        <h3>Acessibilidade</h3>
+        <label><input type="checkbox" id="toggle-contrast"/> Alto contraste</label>
+        <label><input type="checkbox" id="toggle-text"/> Texto grande</label>
+        <label><input type="checkbox" id="toggle-motion"/> Reduzir animações</label>
+        <button id="a11y-close" class="btn">Fechar</button>
+      </div>
+    </section>
+
+    <!-- Temas -->
+    <section id="theme-panel" class="a11y-panel hidden">
+      <div class="a11y-content">
+        <h3>Temas</h3>
+        <button class="btn" data-theme="default">Padrão</button>
+        <button class="btn" data-theme="disney">Disney</button>
+        <button class="btn" data-theme="marvel">Marvel</button>
+        <button class="btn" data-theme="dc">DC</button>
+        <button id="close-theme" class="btn btn-ghost">Fechar</button>
+      </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
