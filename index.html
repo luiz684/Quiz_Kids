@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduKids - Aprenda Brincando!</title>
+    <meta name="description" content="Plataforma educativa divertida para crianças aprenderem matemática, português, ciências e muito mais!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2196f3">
+
+</head>
+<body>
+    <!-- Tela de Cadastro -->
+    <div id="registration-screen" class="screen active">
+        <div class="registration-container">
+            <div class="registration-card">
+                <div class="welcome-header">
+                    <h1 class="main-title">EduKids</h1>
+                    <p class="subtitle">Aprenda brincando e divirta-se estudando!</p>
+                </div>
+                
+                <div class="registration-form">
+                    <!-- Seção de Login com Google -->
+                    <div class="login-section">
+                        <h2 class="form-title">Entrar com Google</h2>
+                        <p class="section-description">Faça login rapidamente com sua conta Google</p>
+                        
+                        <div id="g_id_onload"
+                        data-client_id="571729346307-5vc9hud8ojo5r4p8a0loh1km27hhrk67.apps.googleusercontent.com"
+                        data-callback="handleCredentialResponse"
+                        data-auto_prompt="false">
+                   </div>
+                   
+                   <div class="g_id_signin"
+                   data-type="standard"
+                   data-size="large"
+                   data-theme="outline"></div>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>ou</span>
+                    </div>
+                    
+                    <!-- Seção de Cadastro Manual -->
+                    <div class="manual-registration-section">
+                        <h2 class="form-title">Criar Perfil Manual</h2>
+                        <p class="section-description">Crie seu perfil personalizado</p>
+                        
+                        <div class="form-section">
+                            <h3 class="section-title">Seus Dados</h3>
+                            <div class="input-group">   
+                                <label for="student-nickname">Como quer ser chamado:</label>
+                                <input type="text" id="student-nickname" placeholder="Seu apelido preferido" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="section-title">Escolha seu Avatar</h3>
+                            <div class="avatar-selection">
+                                <div class="avatar-grid">
+                                    <div class="avatar-option selected" data-avatar="1">
+                                        <img src="batman.png" alt="Avatar 1">
+                                        <span class="avatar-name">Batman</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="2">
+                                        <img src="aranha.png" alt="Avatar 2">
+                                        <span class="avatar-name">Homem-Aranha</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="3">
+                                        <img src="super" alt="Avatar 3">
+                                        <span class="avatar-name">Superman</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="4">
+                                        <img src="capitao.png" alt="Avatar 4">
+                                        <span class="avatar-name">Capitão América</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="5">
+                                        <img src="mulher.png" alt="Avatar 5">
+                                        <span class="avatar-name">Mulher Maravilha</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="6">
+                                        <img src="moana.png" alt="Avatar 6">
+                                        <span class="avatar-name">Moana</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="7">
+                                        <img src="branca.png" alt="Avatar 7">
+                                        <span class="avatar-name">Branca de Neve</span>
+                                    </div>
+                                    <div class="avatar-option" data-avatar="8">
+                                        <img src="rapunzel.png" alt="Avatar 8">
+                                        <span class="avatar-name">Rapunzel</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="start-learning-btn" class="start-button">
+                            <span class="button-text">Começar a Aprender!</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="footer-message">
+                    <p>Feito com muito carinho para você aprender e se divertir!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela Principal -->
+    <div id="main-screen" class="screen">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="user-info">
+                    <img id="user-avatar-img" class="user-avatar" alt="Avatar do usuário">
+                    <div class="user-details">
+                        <h2 id="user-greeting">Olá, Estudante!</h2>
+                        <p id="user-name-display">Vamos aprender juntos!</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="logout-btn" class="action-btn">Sair</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h1 class="page-title">Escolha uma Matéria</h1>
+                <p class="page-subtitle">Clique em uma matéria para começar a aprender!</p>
+            </div>
+
+            <div class="subjects-container">
+                <div class="subject-card" data-subject="math">
+                    <div class="subject-icon">M</div>
+                    <h3 class="subject-title">Matemática</h3>
+                    <p class="subject-description">Números, contas e problemas divertidos!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="portuguese">
+                    <div class="subject-icon">P</div>
+                    <h3 class="subject-title">Português</h3>
+                    <p class="subject-description">Palavras, textos e nossa língua!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐ ⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="science">
+                    <div class="subject-icon">C</div>
+                    <h3 class="subject-title">Ciências</h3>
+                    <p class="subject-description">Descubra os segredos da natureza!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐ ⭐ ⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="history">
+                    <div class="subject-icon">H</div>
+                    <h3 class="subject-title">História</h3>
+                    <p class="subject-description">Uma viagem pelo tempo!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="geography">
+                    <div class="subject-icon">G</div>
+                    <h3 class="subject-title">Geografia</h3>
+                    <p class="subject-description">Explore o mundo ao seu redor!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="art">
+                    <div class="subject-icon">A</div>
+                    <h3 class="subject-title">Artes</h3>
+                    <p class="subject-description">Cores, música e criatividade!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="physical_education">
+                    <div class="subject-icon">E</div>
+                    <h3 class="subject-title">Educação Física</h3>
+                    <p class="subject-description">Esportes e movimento!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+
+                <div class="subject-card" data-subject="english">
+                    <div class="subject-icon">I</div>
+                    <h3 class="subject-title">Inglês</h3>
+                    <p class="subject-description">Aprenda uma nova língua!</p>
+                    <div class="subject-stats">
+                        <span class="difficulty">⭐ ⭐ ⭐ ⭐</span>
+                        <span class="questions-count">8 perguntas</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Tela do Quiz -->
+    <div id="quiz-screen" class="screen">
+        <header class="quiz-header">
+            <div class="quiz-info">
+                <span id="current-subject" class="subject-badge">Matemática</span>
+                <div class="timer">
+                    <span id="time-left">3:00</span>
+                </div>
+                <div class="trophy-score" aria-live="polite">
+                       <span id="current-points">0🏆</span>
+                    <span id="trophy-delta" style="margin-left:8px;"></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="quiz-content">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <span id="question-counter">Pergunta 1 de 8</span>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text" class="question-text">Qual é a pergunta?</h2>
+                
+                <div id="options-container" class="options-container">
+                    <!-- Opções serão inseridas aqui via JavaScript -->
+                </div>  
+
+                <div class="quiz-actions">
+                    <button id="hint-btn" class="hint-btn">
+                        Dica
+                    </button>
+                    <button id="next-question-btn" class="next-btn" disabled>
+                        Próxima Pergunta →
+                    </button>
+                </div>
+                
+                <div class="back-button-container">
+                    <button id="back-to-main" class="back-btn">← Voltar</button>
+                </div>
+            </div>
+
+            <div id="hint-container" class="hint-container hidden">
+                <div class="hint-content">
+                    <h3>Dica</h3>
+                    <img id="hint-image" class="hint-image" style="display: none;" alt="Imagem da dica">
+                    <p id="hint-text">Esta é uma dica para ajudar você!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Tela de Resultado -->
+    <div id="result-screen" class="screen">
+        <div class="result-container">
+            <div class="result-card">
+                <div class="result-header">
+                    <h1 class="result-title">Parabéns!</h1>
+                    <div class="result-score">
+                        <span id="final-score">0</span> de <span id="total-questions">8</span>
+                    </div>
+                    <div class="result-percentage"> 
+                        <span id="score-percentage">0%</span> % de aproveitamento!<br>
+                         <span id="trophy-score">0🏆</span>
+                        
+                    </div>
+                </div>
+                 
+               
+            
+                <div class="result-message">
+                    <p id="result-message-text">Você foi incrível!</p>
+                </div>
+
+                
+
+                <div class="result-actions">
+                    <button id="try-again-btn" class="action-button primary">
+                        Tentar Novamente
+                    </button>
+                    <button id="back-to-subjects-btn" class="action-button secondary">
+                        Outras Matérias
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de Acessibilidade -->
+    <div id="accessibility-btn" class="accessibility-btn" title="Configurações de Acessibilidade">
+        <span class="accessibility-icon">♿</span>
+    </div>
+
+    <!-- Painel de Acessibilidade -->
+    <div id="accessibility-panel" class="accessibility-panel hidden">
+        <div class="accessibility-header">
+            <h3>Configurações de Acessibilidade</h3>
+            <button id="close-accessibility" class="close-btn">×</button>
+        </div>
+        
+        <div class="accessibility-content">
+            <!-- Controle de Tamanho de Texto -->
+            <div class="accessibility-option">
+                <label for="text-size-slider">Tamanho do Texto:</label>
+                <div class="slider-container">
+                    <input type="range" id="text-size-slider" min="100" max="200" value="100" step="10">
+                    <span id="text-size-value">100%</span>
+                </div>
+            </div>
+
+            <!-- Controle de Zoom -->
+            <div class="accessibility-option">
+                <label for="zoom-slider">Zoom da Página:</label>
+                <div class="slider-container">
+                    <input type="range" id="zoom-slider" min="100" max="200" value="100" step="10">
+                    <span id="zoom-value">100%</span>
+                </div>
+            </div>
+
+            <!-- Modo Escuro -->
+            <div class="accessibility-option">
+                <label class="toggle-label">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="toggle-slider"></span>
+                    Modo Escuro
+                </label>
+            </div>
+
+            <!-- Efeitos Sonoros -->
+            <div class="accessibility-option">
+                <label class="toggle-label">
+                    <input type="checkbox" id="sound-effects-toggle" checked>
+                    <span class="toggle-slider"></span>
+                    Efeitos Sonoros
+                </label>
+            </div>
+
+            <!-- Botões de Reset -->
+            <div class="accessibility-actions">
+                <button id="reset-accessibility" class="reset-btn">Resetar Configurações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay para fechar o painel -->
+    <div id="accessibility-overlay" class="accessibility-overlay hidden"></div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registrado com sucesso!'))
+      .catch(err => console.log('Erro no registro do Service Worker:', err));
+  }
+</script>
+
+
+<div id="buttonDiv"></div>
+
+<script>
+  window.onload = function () {
+    google.accounts.id.initialize({
+      client_id: "SEU_CLIENT_ID_DO_GOOGLE.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { theme: "filled_blue", size: "large" } // estilo
+    );
+
+    // google.accounts.id.prompt(); // opcional: popup automático
+  };
+</script>
+
+
+</body>
+</html>
